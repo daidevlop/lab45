@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 route::resource('account', AccountController::class)->middleware('checkLogin');
 
-route::get('login', [CheckLoginController::class,'index'])->name('login');
+route::get('/', [CheckLoginController::class,'index'])->name('login');
