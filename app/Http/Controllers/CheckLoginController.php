@@ -11,7 +11,7 @@ class CheckLoginController extends Controller
         return view('Auths.CheckLogin');
     }
     public function postLogin(Request $req){
-        if(Auth::attempt(['email'=>$req->email])){
+        if(Auth::attempt($req->except('_token'))){
             return redirect()->route('account.index');
         }
     }

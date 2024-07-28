@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-route::resource('account', AccountController::class)->middleware('checkLogin');
+route::resource('account', AccountController::class)
+->middleware('checkLogin');
 
 route::get('/', [CheckLoginController::class,'index'])->name('login');
 route::post('post-login', [CheckLoginController::class,'postLogin'])->name('postLogin');

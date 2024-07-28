@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\account;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
@@ -13,7 +17,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $acc = DB::table('accounts')->get();
+        // Auth::logout();
+        $acc = DB::table('accounts')->latest()->get();
         return view('Account.index', compact('acc'));
     }
 
@@ -43,7 +48,7 @@ class AccountController extends Controller
         if($request->hasFile('image')){
             $image = Storage::put('image', $request->file('image'));
         }
-        DB::table('accounts')->insert([
+        Account::create([
             'name' => $request->name,
             'email' => $request->email,
             'type' => $request->type,
@@ -51,6 +56,11 @@ class AccountController extends Controller
             'phone' => $request->phone,
             'address' => $request->address,
             'image' => $image,
+        ]);
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make('123456'),
         ]);
         return redirect()->route('account.index');
     }
