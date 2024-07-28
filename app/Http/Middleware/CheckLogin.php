@@ -16,7 +16,7 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->role == '1-Truong phong'){
+        if(Auth::check() && Auth::user()->type == '1-Truong phong'){
             return $next($request);
         }else{
             return redirect()->route('login');
