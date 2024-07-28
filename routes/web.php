@@ -22,4 +22,4 @@ use Illuminate\Support\Facades\Route;
 route::resource('account', AccountController::class)->middleware('checkLogin');
 
 route::get('/', [CheckLoginController::class,'index'])->name('login');
-route::get('post-login', [CheckLoginController::class,'postLogin'])->name('postLogin');
+route::post('post-login', [CheckLoginController::class,'postLogin'])->name('postLogin');
