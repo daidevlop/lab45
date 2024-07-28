@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CheckLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,4 @@ Route::get('/', function () {
 
 route::resource('account', AccountController::class);
 
-reout
+route::get('login', [CheckLoginController::class,'index'])->name('login');
