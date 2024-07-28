@@ -90,14 +90,13 @@ class AccountController extends Controller
             'type' => 'required|in:1-Truong phong,2-Nhan vien',
             'dob' => 'required',
             'phone' => 'required|max:11',
-            'address' => 'required',
-            'image' => 'required',
+            'address' => 'required',    
         ]);
         // dd($request);
         if($request->hasFile('image')){
             $image = Storage::put('image', $request->file('image'));
         }else{
-            $image = $edit->image;
+            $images = $edit->image;
         }
         DB::table('accounts')->where('id',$id)->update([
             'name' => $request->name,
@@ -106,7 +105,7 @@ class AccountController extends Controller
             'dob' => $request->dob,
             'phone' => $request->phone,
             'address' => $request->address,
-            'image' => $image,
+            'image' => $images,
         ]);
         return redirect()->route('account.index');
     }
