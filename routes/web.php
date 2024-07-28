@@ -19,6 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::resource('account', AccountController::class);
+route::resource('account', AccountController::class)->middleware('checkLogin');
 
 route::get('login', [CheckLoginController::class,'index'])->name('login');
